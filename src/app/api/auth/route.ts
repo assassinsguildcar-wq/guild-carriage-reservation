@@ -1,20 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
-import { setSessionCookie, isAuthenticated } from "@/lib/auth";
-
-export async function GET(request: NextRequest) {
-  if (isAuthenticated(request)) {
-    return NextResponse.json({ authenticated: true });
-  }
-
-  return NextResponse.json({ authenticated: false }, { status: 401 });
-}
 
 export async function POST(request: NextRequest) {
-  const response = NextResponse.json({
-    success: true,
-    message: "AUTH_BYPASS_TEST_001",
-  });
+  const body = await request.json();
+  const { password } = body;
 
-  setSessionCookie(response);
-  return response;
+  const correctPassword = process.env.APP_PASSWORD;
+
+  // 🔴 デバッグ用（超重要）
+  console.log("入力:", password);
+  console.log("正解:", correctPassword);
+
+  if (!correctPassword) {
+    return NextResponse.json(
+      { error: "Server config error (no APP_PASSWORD)" },
+      { status: 500 }
+    );
+  }
+
+  // 🔥 ここが本体
+  if (password !== correctPassword) {
+    return NextResponse.json(
+      { error: "Incorrect password." },
+      { status: 401 }
+    );
+  }
+
+  return NextResponse.json({ success: true });
 }
