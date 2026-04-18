@@ -335,243 +335,243 @@ export default function CalendarPage() {
         </div>
       )}
 
-      <style jsx global>{`
-        .gc-page {
-  min-height: 100vh;
-  background: #000000 !important;
-  color: #f5e7c8;
-  padding: 20px;
-}
+ <style jsx global>{`
+  .gc-page {
+    min-height: 100vh;
+    color: #f5e7c8;
+    padding: 20px;
+  }
 
-        .gc-header {
-          text-align: center;
-          margin-bottom: 24px;
-        }
+  .gc-header {
+    text-align: center;
+    margin-bottom: 24px;
+  }
 
-        .gc-title {
-          font-size: 36px;
-          margin: 0 0 8px;
-        }
+  .gc-title {
+    font-size: 36px;
+    margin: 0 0 8px;
+  }
 
-        .gc-subtitle {
-          color: #d8b874;
-          margin: 0;
-        }
+  .gc-subtitle {
+    color: #d8b874;
+    margin: 0;
+  }
 
-        .gc-main {
-          max-width: 1100px;
-          margin: 0 auto;
-        }
+  .gc-main {
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 20px;
+    padding: 20px;
+  }
 
-        .gc-settings-row {
-          display: flex;
-          justify-content: flex-end;
-          margin-bottom: 16px;
-        }
+  .gc-settings-row {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 16px;
+  }
 
-        .gc-settings-btn,
-        .gc-nav-btn,
-        .gc-save-btn,
-        .gc-delete-btn,
-        .gc-cancel-btn {
-          border: none;
-          border-radius: 12px;
-          padding: 10px 16px;
-          font-weight: 700;
-          cursor: pointer;
-        }
+  .gc-settings-btn,
+  .gc-nav-btn,
+  .gc-save-btn,
+  .gc-delete-btn,
+  .gc-cancel-btn {
+    border: none;
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 700;
+    cursor: pointer;
+  }
 
-        .gc-settings-btn,
-        .gc-nav-btn,
-        .gc-save-btn {
-          background: linear-gradient(180deg, #dcb45b, #be8e2f);
-          color: #111;
-        }
+  .gc-settings-btn,
+  .gc-nav-btn,
+  .gc-save-btn {
+    background: linear-gradient(180deg, #dcb45b, #be8e2f);
+    color: #111;
+  }
 
-        .gc-delete-btn {
-          background: #7a1f1f;
-          color: #fff;
-        }
+  .gc-delete-btn {
+    background: #7a1f1f;
+    color: #fff;
+  }
 
-        .gc-cancel-btn {
-          background: #333;
-          color: #fff;
-        }
+  .gc-cancel-btn {
+    background: #333;
+    color: #fff;
+  }
 
-        .gc-nav {
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          gap: 12px;
-          margin-bottom: 16px;
-        }
+  .gc-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
 
-        .gc-month-label {
-          margin: 0;
-          font-size: 28px;
-          text-align: center;
-          flex: 1;
-        }
+  .gc-month-label {
+    margin: 0;
+    font-size: 28px;
+    text-align: center;
+    flex: 1;
+  }
 
-        .gc-weekdays,
-        .gc-grid {
-          display: grid;
-          grid-template-columns: repeat(7, minmax(0, 1fr));
-          gap: 10px;
-        }
+  .gc-weekdays,
+  .gc-grid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+  }
 
-        .gc-weekday {
-          text-align: center;
-          color: #d4a017;
-          font-weight: 700;
-          padding: 8px 0;
-        }
+  .gc-weekday {
+    text-align: center;
+    color: #d4a017;
+    font-weight: 700;
+    padding: 8px 0;
+  }
 
-        .gc-cell {
-  min-height: 92px;
-  background: #000000 !important;
-  border: 1px solid #9c6f12;
-  border-radius: 14px;
-  color: #f5e7c8;
-  text-align: left;
-  padding: 10px;
-}
+  .gc-cell {
+    min-height: 92px;
+    background: #000000;
+    border: 1px solid #9c6f12;
+    border-radius: 14px;
+    color: #f5e7c8;
+    text-align: left;
+    padding: 10px;
+  }
 
-        .gc-cell-empty {
-          background: transparent;
-          border: none;
-        }
+  .gc-cell-empty {
+    background: transparent;
+    border: none;
+  }
 
-        .gc-cell-reserved {
-  background: #000000 !important;
-  box-shadow: inset 0 0 0 1px #d4a017;
-}
-        .gc-cell-today {
-          outline: 2px solid #f0c14b;
-        }
+  .gc-cell-reserved {
+    background: #000000;
+    box-shadow: inset 0 0 0 1px #d4a017;
+  }
 
-        .gc-day {
-          font-size: 18px;
-          font-weight: 700;
-          margin-bottom: 8px;
-        }
+  .gc-cell-today {
+    outline: 2px solid #f0c14b;
+  }
 
-        .gc-name-wrap {
-          min-height: 36px;
-        }
+  .gc-day {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
 
-        .gc-name {
-          display: inline-block;
-          font-size: 13px;
-          line-height: 1.3;
-          color: #f0c14b;
-          word-break: break-word;
-        }
+  .gc-name-wrap {
+    min-height: 36px;
+  }
 
-        .gc-empty-label {
-          font-size: 12px;
-          color: #8f7a57;
-        }
+  .gc-name {
+    display: inline-block;
+    font-size: 13px;
+    line-height: 1.3;
+    color: #f0c14b;
+    word-break: break-word;
+  }
 
-        .gc-empty-past {
-          color: #6e6254;
-        }
+  .gc-empty-label {
+    font-size: 12px;
+    color: #8f7a57;
+  }
 
-        .gc-modal-backdrop {
-          position: fixed;
-          inset: 0;
-          background: rgba(0, 0, 0, 0.65);
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          z-index: 1000;
-        }
+  .gc-empty-past {
+    color: #6e6254;
+  }
 
-        .gc-modal {
-          width: 100%;
-          max-width: 460px;
-          background: #1b0d06;
-          border: 1px solid #9c6f12;
-          border-radius: 18px;
-          padding: 24px;
-        }
+  .gc-modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 1000;
+  }
 
-        .gc-modal-title {
-          margin: 0 0 18px;
-          font-size: 24px;
-        }
+  .gc-modal {
+    width: 100%;
+    max-width: 460px;
+    background: #000000;
+    border: 1px solid #9c6f12;
+    border-radius: 18px;
+    padding: 24px;
+  }
 
-        .gc-label {
-          display: block;
-          margin: 12px 0 8px;
-          color: #f0c14b;
-          font-weight: 700;
-        }
+  .gc-modal-title {
+    margin: 0 0 18px;
+    font-size: 24px;
+  }
 
-        .gc-select {
-          width: 100%;
-          height: 48px;
-          border-radius: 12px;
-          border: 1px solid #c99a27;
-          background: #000;
-          color: #f5e7c8;
-          padding: 0 12px;
-        }
+  .gc-label {
+    display: block;
+    margin: 12px 0 8px;
+    color: #f0c14b;
+    font-weight: 700;
+  }
 
-        .gc-error {
-          margin-top: 12px;
-          color: #ff8f8f;
-        }
+  .gc-select {
+    width: 100%;
+    height: 48px;
+    border-radius: 12px;
+    border: 1px solid #c99a27;
+    background: #000;
+    color: #f5e7c8;
+    padding: 0 12px;
+  }
 
-        .gc-modal-actions {
-          display: flex;
-          gap: 10px;
-          flex-wrap: wrap;
-          margin-top: 20px;
-        }
+  .gc-error {
+    margin-top: 12px;
+    color: #ff8f8f;
+  }
 
-        @media (max-width: 640px) {
-          .gc-page {
-            padding: 12px;
-          }
+  .gc-modal-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
 
-          .gc-title {
-            font-size: 28px;
-          }
+  @media (max-width: 640px) {
+    .gc-page {
+      padding: 12px;
+    }
 
-          .gc-month-label {
-            font-size: 22px;
-          }
+    .gc-title {
+      font-size: 28px;
+    }
 
-          .gc-weekdays,
-          .gc-grid {
-            gap: 6px;
-          }
+    .gc-month-label {
+      font-size: 22px;
+    }
 
-          .gc-cell {
-            min-height: 78px;
-            padding: 8px;
-          }
+    .gc-weekdays,
+    .gc-grid {
+      gap: 6px;
+    }
 
-          .gc-day {
-            font-size: 16px;
-            margin-bottom: 6px;
-          }
+    .gc-cell {
+      min-height: 78px;
+      padding: 8px;
+    }
 
-          .gc-name {
-            font-size: 11px;
-          }
+    .gc-day {
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
 
-          .gc-settings-row {
-            justify-content: stretch;
-          }
+    .gc-name {
+      font-size: 11px;
+    }
 
-          .gc-settings-btn {
-            width: 100%;
-          }
-        }
-      `}</style>
-    </>
-  );
-}
+    .gc-settings-row {
+      justify-content: stretch;
+    }
+
+    .gc-settings-btn {
+      width: 100%;
+    }
+  }
+`}</style>     
