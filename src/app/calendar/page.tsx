@@ -570,8 +570,11 @@ export default function CalendarPage() {
       justify-content: stretch;
     }
 
-    .gc-settings-btn {
+.gc-settings-btn {
       width: 100%;
     }
   }
-`}</style>     
+      `}</style>
+    </>
+  );
+}
