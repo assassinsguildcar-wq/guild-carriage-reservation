@@ -337,10 +337,11 @@ export default function CalendarPage() {
 
  <style jsx global>{`
   .gc-page {
-    min-height: 100vh;
-    color: #f5e7c8;
-    padding: 20px;
-  }
+  min-height: 100vh;
+  background: #000000;
+  color: #f5e7c8;
+  padding: 20px;
+}
 
   .gc-header {
     text-align: center;
@@ -358,12 +359,12 @@ export default function CalendarPage() {
   }
 
   .gc-main {
-    max-width: 1100px;
-    margin: 0 auto;
-    background: #000000;
-    border-radius: 20px;
-    padding: 20px;
-  }
+  max-width: 1100px;
+  margin: 0 auto;
+  background: #000000;
+  border-radius: 20px;
+  padding: 20px;
+}
 
   .gc-settings-row {
     display: flex;
