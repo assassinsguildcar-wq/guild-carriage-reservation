@@ -338,6 +338,7 @@ export default function CalendarPage() {
       <style jsx global>{`
         .gc-page {
   min-height: 100vh;
+  background: #120804;
   color: #f5e7c8;
   padding: 20px;
 }
