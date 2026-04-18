@@ -338,7 +338,7 @@ export default function CalendarPage() {
       <style jsx global>{`
         .gc-page {
   min-height: 100vh;
-  background: #120804;
+  background: #000000 !important;
   color: #f5e7c8;
   padding: 20px;
 }
@@ -428,14 +428,14 @@ export default function CalendarPage() {
         }
 
         .gc-cell {
-          min-height: 92px;
-          background: #1b0d06;
-          border: 1px solid #9c6f12;
-          border-radius: 14px;
-          color: #f5e7c8;
-          text-align: left;
-          padding: 10px;
-        }
+  min-height: 92px;
+  background: #000000 !important;
+  border: 1px solid #9c6f12;
+  border-radius: 14px;
+  color: #f5e7c8;
+  text-align: left;
+  padding: 10px;
+}
 
         .gc-cell-empty {
           background: transparent;
@@ -443,10 +443,9 @@ export default function CalendarPage() {
         }
 
         .gc-cell-reserved {
-          background: #241208;
-          box-shadow: inset 0 0 0 1px #d4a017;
-        }
-
+  background: #000000 !important;
+  box-shadow: inset 0 0 0 1px #d4a017;
+}
         .gc-cell-today {
           outline: 2px solid #f0c14b;
         }
