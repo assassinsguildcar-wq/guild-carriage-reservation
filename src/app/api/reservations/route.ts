@@ -115,6 +115,39 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Discord通知
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+    console.log("DISCORD_WEBHOOK_URL exists:", !!webhookUrl);
+
+    if (webhookUrl) {
+      const discordRes = await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: `📦 新しい予約が入りました！
+名前: ${member_name}
+日付: ${date}`,
+        }),
+      });
+
+      const discordText = await discordRes.text();
+      console.log("Discord response status:", discordRes.status);
+      console.log("Discord response text:", discordText);
+
+      if (!discordRes.ok) {
+        console.error("Discord通知失敗");
+      }
+    } else {
+      console.error("DISCORD_WEBHOOK_URL が未設定です");
+    }
+  } catch (error) {
+    console.error("Discord通知エラー:", error);
+  }
+
   return NextResponse.json({ success: true });
 }
 
