@@ -28,9 +28,17 @@ export default function Home() {
   };
 
   return (
-    <div className="gc-container">
+    <div
+      style={{
+        minHeight: "100vh",
+        background: "#000000",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "24px",
+      }}
+    >
       <div className="gc-card">
-
         <img
           src="/logo.png"
           alt="ASSASSINS"
@@ -54,6 +62,9 @@ export default function Home() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="gc-input"
+          onKeyDown={(e) => {
+            if (e.key === "Enter") handleLogin();
+          }}
         />
 
         <button onClick={handleLogin} className="gc-button">
