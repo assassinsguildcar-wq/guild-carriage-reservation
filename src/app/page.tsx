@@ -28,34 +28,40 @@ export default function Home() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      
-      {/* 🔥 これで反映確認 */}
-      <p style={{ color: "red", fontSize: "32px", fontWeight: 700 }}>
-        LOGIN_TEST_002
-      </p>
+    <div className="gc-container">
+      <div className="gc-card">
 
-      <h1>Guild Carriage Reservation</h1>
+        <img
+          src="/logo.png"
+          alt="ASSASSINS"
+          className="gc-logo"
+        />
 
-      <p>Enter Guild Password</p>
+        <p className="gc-guild">ASSASSINS GUILD</p>
 
-      <input
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ padding: "10px", fontSize: "16px" }}
-      />
+        <h1 className="gc-title">Guild Carriage Reservation</h1>
 
-      <br /><br />
+        <p className="gc-subtitle">
+          Manage carriage duty assignments for guild members.
+        </p>
 
-      <button
-        onClick={handleLogin}
-        style={{ padding: "10px 20px", fontSize: "16px" }}
-      >
-        Enter
-      </button>
+        <p className="gc-auth">Authorized members only</p>
 
-      <p style={{ color: "red", marginTop: "20px" }}>{message}</p>
+        <p className="gc-label">Enter Guild Password</p>
+
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="gc-input"
+        />
+
+        <button onClick={handleLogin} className="gc-button">
+          Enter
+        </button>
+
+        {message && <p className="gc-error">{message}</p>}
+      </div>
     </div>
   );
 }

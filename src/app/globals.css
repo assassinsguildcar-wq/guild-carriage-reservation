@@ -1,1 +1,77 @@
 @import "tailwindcss";
+@import "tailwindcss";
+
+.gc-container {
+  min-height: 100vh;
+  background: #1a0e05;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gc-card {
+  background: #2a1609;
+  border: 1px solid #d4a017;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  color: #f5e6c8;
+  width: 400px;
+}
+
+.gc-logo {
+  width: 80px;
+  margin: 0 auto 10px;
+  display: block;
+}
+
+.gc-guild {
+  letter-spacing: 3px;
+  color: #d4a017;
+  margin-bottom: 10px;
+}
+
+.gc-title {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.gc-subtitle {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.gc-auth {
+  font-size: 12px;
+  margin-bottom: 20px;
+  color: #c8b27a;
+}
+
+.gc-label {
+  margin-bottom: 10px;
+}
+
+.gc-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #d4a017;
+  background: black;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.gc-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  background: linear-gradient(#e0b84c, #b88a2a);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.gc-error {
+  color: red;
+  margin-top: 10px;
+}
