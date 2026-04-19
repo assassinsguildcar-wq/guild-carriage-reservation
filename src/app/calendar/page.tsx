@@ -212,7 +212,7 @@ export default function CalendarPage() {
               onClick={() => (window.location.href = "/settings")}
               className="gc-settings-btn"
             >
-              Manage Members
+              Settings
             </button>
           </div>
 
@@ -337,11 +337,11 @@ export default function CalendarPage() {
 
  <style jsx global>{`
   .gc-page {
-  min-height: 100vh;
-  background: #000000;
-  color: #f5e7c8;
-  padding: 20px;
-}
+    min-height: 100vh;
+    background: #000000;
+    color: #f5e7c8;
+    padding: 20px;
+  }
 
   .gc-header {
     text-align: center;
@@ -359,12 +359,12 @@ export default function CalendarPage() {
   }
 
   .gc-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  background: #000000;
-  border-radius: 20px;
-  padding: 20px;
-}
+    max-width: 1100px;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 20px;
+    padding: 20px;
+  }
 
   .gc-settings-row {
     display: flex;
@@ -536,46 +536,94 @@ export default function CalendarPage() {
   }
 
   @media (max-width: 640px) {
-    .gc-page {
-      padding: 12px;
-    }
-
-    .gc-title {
-      font-size: 28px;
-    }
-
-    .gc-month-label {
-      font-size: 22px;
-    }
-
-    .gc-weekdays,
-    .gc-grid {
-      gap: 6px;
-    }
-
-    .gc-cell {
-      min-height: 78px;
-      padding: 8px;
-    }
-
-    .gc-day {
-      font-size: 16px;
-      margin-bottom: 6px;
-    }
-
-    .gc-name {
-      font-size: 11px;
-    }
-
-    .gc-settings-row {
-      justify-content: stretch;
-    }
-
-.gc-settings-btn {
-      width: 100%;
-    }
+  .gc-page {
+    padding: 10px;
   }
-      `}</style>
-    </>
-  );
+
+  .gc-title {
+    font-size: 24px;
+    line-height: 1.2;
+  }
+
+  .gc-subtitle {
+    font-size: 12px;
+  }
+
+  .gc-main {
+    padding: 12px;
+    border-radius: 16px;
+  }
+
+  .gc-month-label {
+    font-size: 20px;
+  }
+
+  .gc-weekdays,
+  .gc-grid {
+    gap: 4px;
+  }
+
+  .gc-weekday {
+    font-size: 12px;
+    padding: 6px 0;
+  }
+
+  .gc-cell {
+    min-height: 72px;
+    padding: 6px;
+    border-radius: 10px;
+  }
+
+  .gc-day {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+
+  .gc-name {
+    font-size: 10px;
+    line-height: 1.2;
+  }
+
+  .gc-empty-label,
+  .gc-empty-past {
+    font-size: 10px;
+  }
+
+  .gc-settings-row {
+    justify-content: stretch;
+  }
+
+  .gc-settings-btn {
+    width: 100%;
+    min-height: 44px;
+    font-size: 14px;
+  }
+
+  .gc-nav-btn {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0;
+    font-size: 18px;
+  }
+
+  .gc-save-btn,
+  .gc-delete-btn,
+  .gc-cancel-btn {
+    width: 100%;
+    min-height: 44px;
+  }
+
+  .gc-modal {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .gc-modal-title {
+    font-size: 20px;
+  }
+
+  .gc-select {
+    height: 44px;
+    font-size: 16px;
+  }
 }

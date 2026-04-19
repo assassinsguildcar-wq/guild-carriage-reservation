@@ -1,4 +1,4 @@
-"use client";
+Settings"use client";
 
 import { useEffect, useState } from "react";
 
@@ -90,15 +90,20 @@ export default function SettingsPage() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold tracking-wide text-amber-400">
-            Manage Members
-          </h1>
-          <p className="mt-2 text-sm text-neutral-400">
-            Add, edit, or delete guild members.
-          </p>
+  Settings
+</h1>
+<p className="mt-2 text-sm text-neutral-400">
+  Manage guild settings.
+</p>
         </div>
 
         <div className="rounded-2xl border border-amber-500/20 bg-neutral-900/80 p-6 shadow-xl">
-       
+       <h2 className="mb-4 text-2xl font-semibold text-amber-300">
+  Manage Members
+</h2>
+<p className="mb-6 text-sm text-neutral-400">
+  Add, edit, or delete guild members.
+</p>
 
           <div className="mb-6 flex gap-3">
             <input
