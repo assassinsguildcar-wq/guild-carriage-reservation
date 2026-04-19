@@ -176,7 +176,12 @@ export default function SettingsPage() {
           
          {/* Discord Monthly Post */}
 <div style={{ marginTop: "40px" }}>
-  <h2>Post Monthly Reservations to Discord</h2>
+  <h2 className="mb-4 text-2xl font-semibold text-amber-300">
+  Post Monthly Reservations to Discord
+</h2>
+<p className="mb-6 text-sm text-neutral-400">
+  Send monthly reservation summary to Discord.
+</p>
 
   <input
     type="month"
