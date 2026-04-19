@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 export default function SettingsPage() {
   const [name, setName] = useState("");
+  const [month, setMonth] = useState("");
   const [members, setMembers] = useState<{ id: string; name: string }[]>([]);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [editingName, setEditingName] = useState("");
@@ -167,6 +168,64 @@ export default function SettingsPage() {
               </li>
             ))}
           </ul>
+          if (!month) {
+  alert("Please select a month");
+  return;
+}
+          {/* Discord Monthly Post */}
+<div style={{ marginTop: "40px" }}>
+  <h2>Post Monthly Reservations to Discord</h2>
+
+  <input
+    type="month"
+    value={month}
+    onChange={(e) => setMonth(e.target.value)}
+    style={{
+      padding: "8px",
+      marginRight: "10px",
+      borderRadius: "6px",
+      border: "1px solid #ccc",
+    }}
+  />
+
+  <button
+    onClick={async () => {
+      if (!month) {
+  alert("Please select a month");
+  return;
+}
+      try {
+        const res = await fetch("/api/discord/monthly", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ month }),
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          alert("Error: " + data.error);
+        } else {
+          alert("Posted to Discord successfully!");
+        }
+      } catch (err) {
+        alert("Request failed");
+      }
+    }}
+    style={{
+      padding: "8px 16px",
+      borderRadius: "6px",
+      backgroundColor: "#5865F2",
+      color: "white",
+      border: "none",
+      cursor: "pointer",
+    }}
+  >
+    Post to Discord
+  </button>
+</div>
         </div>
       </div>
     </div>
