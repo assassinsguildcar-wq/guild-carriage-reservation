@@ -627,4 +627,5 @@ export default function CalendarPage() {
     font-size: 16px;
   }
     </>
+    );
 }
