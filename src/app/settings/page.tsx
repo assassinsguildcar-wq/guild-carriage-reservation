@@ -103,6 +103,12 @@ export default function SettingsPage() {
 
   return (
     <div className="min-h-screen bg-neutral-950 px-6 py-10 text-white">
+      <button
+  onClick={() => (window.location.href = "/calendar")}
+  className="mb-6 rounded-xl bg-amber-500 px-5 py-3 font-medium text-black hover:bg-amber-400"
+>
+  ← Back to Calendar
+</button>
       <div className="mx-auto max-w-4xl">
         <div className="mb-8">
           <h1 className="text-3xl font-semibold tracking-wide text-amber-400">
