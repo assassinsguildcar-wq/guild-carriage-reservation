@@ -19,19 +19,34 @@ export default function SettingsPage() {
   };
 
   const addMember = async () => {
-    if (!name.trim()) return;
+  const trimmedName = name.trim();
+  if (!trimmedName) return;
 
-    await fetch("/api/members", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ name }),
-    });
+  const res = await fetch("/api/members", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: trimmedName }),
+  });
 
-    setName("");
-    fetchMembers();
-  };
+  const data = await res.json();
+
+  if (!res.ok) {
+    alert(data.error || "Failed to add member");
+    return;
+  }
+
+  // ←ここからが今回の修正ポイント
+  setName("");
+
+  if (data.member) {
+    setMembers((prev) => [...prev, data.member]);
+  } else {
+    // memberが返ってこない場合の保険
+    await fetchMembers();
+  }
+};
 
   useEffect(() => {
     fetchMembers();
@@ -81,6 +96,7 @@ export default function SettingsPage() {
     setMembers((prev) =>
       prev.map((m) => (m.id === id ? { ...m, name: editingName } : m))
     );
+    
     setEditingId(null);
     setEditingName("");
   };
@@ -121,7 +137,7 @@ export default function SettingsPage() {
           </div>
 
           <ul className="space-y-3">
-            {members.map((m) => (
+            {members.filter((m) => m && m.id).map((m) => (
               <li
                 key={m.id}
                 className="rounded-xl border border-neutral-800 bg-neutral-950 px-4 py-4"

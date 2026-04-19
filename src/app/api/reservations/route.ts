@@ -115,37 +115,25 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  // Discord通知
+  // Discord通知（新規予約）
   try {
     const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
 
-    console.log("DISCORD_WEBHOOK_URL exists:", !!webhookUrl);
-
     if (webhookUrl) {
-      const discordRes = await fetch(webhookUrl, {
+      await fetch(webhookUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           content: `📦 A new reservation has been added!
-名前: ${member_name}
-日付: ${date}`,
+Name: ${member_name}
+Date: ${date}`,
         }),
       });
-
-      const discordText = await discordRes.text();
-      console.log("Discord response status:", discordRes.status);
-      console.log("Discord response text:", discordText);
-
-      if (!discordRes.ok) {
-        console.error("Discord通知失敗");
-      }
-    } else {
-      console.error("DISCORD_WEBHOOK_URL が未設定です");
     }
   } catch (error) {
-    console.error("Discord通知エラー:", error);
+    console.error("Discord notification error:", error);
   }
 
   return NextResponse.json({ success: true });
@@ -198,7 +186,6 @@ export async function PATCH(req: NextRequest) {
   }
 
   // 月2回チェック
-  // old_date の予約1件は自分で置き換えるので、カウントから除外して考える
   const { monthStart, monthEnd } = getMonthStartEndFromDate(new_date);
 
   const { data: sameMemberReservations, error: countError } = await supabaseServer
@@ -230,6 +217,28 @@ export async function PATCH(req: NextRequest) {
 
   if (updateError) {
     return NextResponse.json({ error: updateError.message }, { status: 500 });
+  }
+
+  // Discord通知（予約編集）
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: `✏️ A reservation has been updated!
+Name: ${member_name}
+Old date: ${old_date}
+New date: ${new_date}`,
+        }),
+      });
+    }
+  } catch (error) {
+    console.error("Discord notification error:", error);
   }
 
   return NextResponse.json({ success: true });
