@@ -103,56 +103,57 @@ export default function CalendarPage() {
   };
 
   const handleSave = async () => {
-    if (!selMember) {
-      setFormError("Please select a member.");
-      return;
-    }
+  if (!selMember) {
+    setFormError("Please select a member.");
+    return;
+  }
 
-    if (!selOperator) {
-      setFormError("Please select your own name.");
-      return;
-    }
+  if (!selOperator) {
+    setFormError("Please select your own name.");
+    return;
+  }
 
-    if (!modalDate) return;
+  if (!modalDate) return;
 
-    const existing = reservations[modalDate];
-    let res: Response;
+  const existing = reservations[modalDate];
+  let res: Response;
 
-    if (existing) {
-      res = await fetch("/api/reservations", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          old_date: modalDate,
-          new_date: modalDate,
-          member_name: selMember,
-        }),
-      });
-    } else {
-      res = await fetch("/api/reservations", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          date: modalDate,
-          member_name: selMember,
-        }),
-      });
-    }
+  if (existing) {
+    res = await fetch("/api/reservations", {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        old_date: modalDate,
+        new_date: modalDate,
+        member_name: selMember,
+        operator: selOperator,
+      }),
+    });
+  } else {
+    res = await fetch("/api/reservations", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        date: modalDate,
+        member_name: selMember,
+      }),
+    });
+  }
 
-    const data = await res.json();
+  const data = await res.json();
 
-    if (data.error) {
-      setFormError(data.error);
-      return;
-    }
+  if (data.error) {
+    setFormError(data.error);
+    return;
+  }
 
-    await fetchReservations(year, month);
-    closeModal();
-  };
+  await fetchReservations(year, month);
+  closeModal();
+};
 
   const handleDelete = async () => {
     if (!modalDate) return;

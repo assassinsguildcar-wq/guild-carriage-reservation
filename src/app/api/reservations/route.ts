@@ -141,9 +141,9 @@ Date: ${date}`,
 
 // 予約編集
 export async function PATCH(req: NextRequest) {
-  const { old_date, new_date, member_name } = await req.json();
+  const { old_date, new_date, member_name, operator } = await req.json();
 
-  if (!old_date || !new_date || !member_name) {
+  if (!old_date || !new_date || !member_name || !operator) {
     return NextResponse.json({ error: "missing data" }, { status: 400 });
   }
 
@@ -234,7 +234,8 @@ export async function PATCH(req: NextRequest) {
 Old name: ${oldReservation.member_name}
 New name: ${member_name}
 Old date: ${old_date}
-New date: ${new_date}`,
+New date: ${new_date}
+Operator: ${operator}`,
         }),
       });
     }
