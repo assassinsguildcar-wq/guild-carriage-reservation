@@ -201,9 +201,8 @@ export async function PATCH(req: NextRequest) {
   }
 
   const countExcludingOld = (sameMemberReservations ?? []).filter(
-    (r) => r.date !== old_date
-  ).length;
-
+  (r: { date: string; member_name: string }) => r.date !== old_date
+).length;
   if (countExcludingOld >= 2) {
     return NextResponse.json({ error: "limit reached" }, { status: 400 });
   }
@@ -256,6 +255,21 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: "missing date" }, { status: 400 });
   }
 
+  // 削除前に元の予約を取得
+  const { data: oldReservation, error: fetchError } = await supabaseServer
+    .from("reservations")
+    .select("*")
+    .eq("date", date)
+    .maybeSingle();
+
+  if (fetchError) {
+    return NextResponse.json({ error: fetchError.message }, { status: 500 });
+  }
+
+  if (!oldReservation) {
+    return NextResponse.json({ error: "reservation not found" }, { status: 404 });
+  }
+
   const { error } = await supabaseServer
     .from("reservations")
     .delete()
@@ -265,5 +279,28 @@ export async function DELETE(req: NextRequest) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
+  // Discord通知（予約削除）
+  try {
+    const webhookUrl = process.env.DISCORD_WEBHOOK_URL;
+
+    if (webhookUrl) {
+      await fetch(webhookUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          content: `🗑️ A reservation has been deleted!
+Name: ${oldReservation.member_name}
+Date: ${date}
+Entered by: ${oldReservation.operator || "-"}`,
+        }),
+      });
+    }
+  } catch (error) {
+    console.error("Discord notification error:", error);
+  }
+
   return NextResponse.json({ success: true });
 }
+ 
