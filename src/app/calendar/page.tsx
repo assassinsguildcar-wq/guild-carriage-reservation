@@ -625,7 +625,7 @@ export default function CalendarPage() {
   .gc-select {
     height: 44px;
     font-size: 16px;
+ `}</style>
+ </>
+ );
   }
-    </>
-    );
-}
