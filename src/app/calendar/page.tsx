@@ -39,7 +39,7 @@ function prettyDate(iso: string): string {
 export default function CalendarPage() {
   const [year, setYear] = useState(now.getFullYear());
   const [month, setMonth] = useState(now.getMonth() + 1);
-  const [reservations, setReservations] = useState<Record<string, string>>({});
+  const [reservations, setReservations] = useState<Record<string, { member_name: string; operator?: string }>>({});
 
   const [modalDate, setModalDate] = useState<string | null>(null);
   const [members, setMembers] = useState<string[]>([]);
@@ -60,11 +60,14 @@ export default function CalendarPage() {
     const data = await res.json();
 
     if (data.reservations) {
-      const map: Record<string, string> = {};
-      data.reservations.forEach((r: any) => {
-        map[r.date] = r.member_name;
-      });
-      setReservations(map);
+      const map: Record<string, { member_name: string; operator?: string }> = {};
+data.reservations.forEach((r: any) => {
+  map[r.date] = {
+    member_name: r.member_name,
+    operator: r.operator,
+  };
+});
+setReservations(map);
     } else {
       setReservations({});
     }
@@ -90,7 +93,7 @@ export default function CalendarPage() {
 
   const openModal = (iso: string) => {
     setModalDate(iso);
-    setSelMember(reservations[iso] ?? "");
+    setSelMember(reservations[iso]?.member_name || "");
     setSelOperator("");
     setConfirmDelete(false);
     setFormError("");
@@ -260,7 +263,19 @@ export default function CalendarPage() {
 
                   <div className="gc-name-wrap">
                     {reservedBy ? (
-                      <span className="gc-name">{reservedBy}</span>
+                      <div>
+  <span className="gc-name">{reservedBy?.member_name}</span>
+  <div
+    style={{
+      fontSize: "11px",
+      color:  "#8a8a8a",
+      marginTop: "2px",
+      lineHeight: 1.2,
+    }}
+  >
+    entered by: {reservedBy?.operator || "-"}
+  </div>
+</div>
                     ) : (
                       <span className={`gc-empty-label ${isPast ? "gc-empty-past" : ""}`}>
                         {isPast ? "Past" : "Open"}
