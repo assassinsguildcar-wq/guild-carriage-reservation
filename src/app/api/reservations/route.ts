@@ -109,7 +109,7 @@ export async function POST(req: NextRequest) {
 
   const { error } = await supabaseServer
     .from("reservations")
-    .insert([{ date, member_name }]);
+    .insert([{ date, member_name, operator }]);
 
   if (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
@@ -211,9 +211,10 @@ export async function PATCH(req: NextRequest) {
   const { error: updateError } = await supabaseServer
     .from("reservations")
     .update({
-      date: new_date,
-      member_name,
-    })
+  date: new_date,
+  member_name,
+  operator,
+})
     .eq("date", old_date);
 
   if (updateError) {
