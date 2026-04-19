@@ -168,11 +168,8 @@ export default function SettingsPage() {
               </li>
             ))}
           </ul>
-          if (!month) {
-  alert("Please select a month");
-  return;
-}
-          {/* Discord Monthly Post */}
+          
+         {/* Discord Monthly Post */}
 <div style={{ marginTop: "40px" }}>
   <h2>Post Monthly Reservations to Discord</h2>
 
@@ -191,9 +188,10 @@ export default function SettingsPage() {
   <button
     onClick={async () => {
       if (!month) {
-  alert("Please select a month");
-  return;
-}
+        alert("Please select a month");
+        return;
+      }
+
       try {
         const res = await fetch("/api/discord/monthly", {
           method: "POST",
