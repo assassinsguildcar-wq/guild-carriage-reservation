@@ -231,7 +231,8 @@ export async function PATCH(req: NextRequest) {
         },
         body: JSON.stringify({
           content: `✏️ A reservation has been updated!
-Name: ${member_name}
+Old name: ${oldReservation.member_name}
+New name: ${member_name}
 Old date: ${old_date}
 New date: ${new_date}`,
         }),
