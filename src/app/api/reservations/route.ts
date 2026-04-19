@@ -62,9 +62,9 @@ export async function GET(req: NextRequest) {
 
 // 新規予約
 export async function POST(req: NextRequest) {
-  const { date, member_name } = await req.json();
+  const { date, member_name, operator } = await req.json();
 
-  if (!date || !member_name) {
+  if (!date || !member_name || !operator) {
     return NextResponse.json({ error: "missing data" }, { status: 400 });
   }
 
@@ -127,7 +127,8 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify({
           content: `📦 A new reservation has been added!
-Name: ${member_name}
+Reserved by: ${member_name}
+Entered by: ${operator}
 Date: ${date}`,
         }),
       });

@@ -138,9 +138,10 @@ export default function CalendarPage() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        date: modalDate,
-        member_name: selMember,
-      }),
+  date: modalDate,
+  member_name: selMember,
+  operator: selOperator,
+}),
     });
   }
 
