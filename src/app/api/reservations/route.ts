@@ -128,7 +128,7 @@ export async function POST(req: NextRequest) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          content: `📦 新しい予約が入りました！
+          content: `📦 A new reservation has been added!
 名前: ${member_name}
 日付: ${date}`,
         }),
